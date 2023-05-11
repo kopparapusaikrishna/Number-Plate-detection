@@ -1,0 +1,8 @@
+Flask==2.3.2
+opencv-contrib-python==4.7.0.72
+matplotlib==3.7.1
+pytesseract==0.3.10
+scikit-learn==1.2.2
+
+
+# tesseract-ocr==4.1.1

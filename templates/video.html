@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Car Plate Detection</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="font-family: Helvetica; background-color: rgb(5, 4, 4); color: rgb(232, 232, 232)">
+    Dectection numberplates from a video.
+    <br>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+</body>
+
+<script>
+    function startObjectDetection() {
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(stream => {
+                video.srcObject = stream;
+                video.play();
+                setInterval(() => {
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    canvas.toBlob(blob => {
+                        const formData = new FormData();
+                        formData.append('image', blob);
+                        fetch('/detect', {method: 'POST', body: formData})
+                            .then(response => response.json())
+                            .then(results => {
+                                // Handle detection results here
+                                console.log(results);
+                                drawBoundingBoxes(canvas, results);
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    }, 'image/jpeg', 0.8);
+                }, 1000/30);
+            })
+            .catch(error => {
+            console.error(error);
+        });
+    }
+
+    function drawBoundingBoxes(canvas, results) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const result of results) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(result.x, result.y, result.w, result.h);
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'red';
+            ctx.fillText(`${result.label} (${(result.confidence * 100).toFixed(2)}%)`, result.x, result.y - 5);
+        }
+    }
+
+    startObjectDetection();
+</script>
+
+</html>
