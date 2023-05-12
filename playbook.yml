@@ -1,0 +1,13 @@
+---
+- name: Deploying website with Kubernetes
+  hosts: localhost
+  remote_user: nagasrihith608
+  tasks:
+    - name: create website deployment
+      kubernetes.core.k8s:
+        definition: "{{ lookup('file', './k8s-deploy.yaml') | from_yaml }}"
+        state: present
+    - name: create website service
+      kubernetes.core.k8s:
+        definition: "{{ lookup('file', './k8s-service.yaml') | from_yaml }}" 
+        state: present

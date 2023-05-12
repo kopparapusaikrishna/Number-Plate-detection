@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-deployment
+  namespace: default
+  labels:
+    app: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+      - name: website
+        # image: docushareacr.azurecr.io/docushare-frontend:latest
+        image: sk12092001/number_plate_detection:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
