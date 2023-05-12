@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import pytesseract as pt
 
-# pt.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pt.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 INPUT_WIDTH =  640
@@ -56,6 +56,11 @@ def non_maximum_supression(input_image, detections):
 
     boxes_np = np.array(boxes).tolist()
     confidences_np = np.array(confidences).tolist()
+
+    # print(len(boxes_np))
+    # print(len(confidences_np))
+    if len(boxes_np)==0:
+        return boxes_np, confidences_np, [-1]
     
     index = cv2.dnn.NMSBoxes(boxes_np, confidences_np, 0.25, 0.45).flatten()
     
@@ -81,25 +86,51 @@ def extract_text(image,bbox):
         return text
 
 def drawings(image,boxes_np,confidences_np,index):
+    if index[0]==-1:
+        return image, []
+
+    else: 
+        text_list = []
+        for ind in index:
+            x,y,w,h =  boxes_np[ind]
+            bb_conf = confidences_np[ind]
+            conf_text = 'plate: {:.0f}%'.format(bb_conf*100)
+            license_text = extract_text(image,boxes_np[ind])
+
+            cv2.rectangle(image, (x,y), (x+w, y+h), (255,0,255), 10)
+            cv2.rectangle(image, (x,y-30), (x+w, y), (0,0,0),-1)
+            
+            cv2.rectangle(image, (x,y+h), (x+w, y+h+30), (0,0,0),-1)
+
+            cv2.putText(image, conf_text, (x,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255,255,255),3)
+            
+            cv2.putText(image, license_text, (x, y+h+25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255),2) # text
+
+            text_list.append(license_text)
+
+        return image, text_list
+
+
+def test_function_for_bb_detections(img):
+    input_image, detections = get_detections(img,net)
+    boxes_np, confidences_np, index = non_maximum_supression(input_image, detections)
+
+    if index[0]==-1:
+        return -1, -1
+
     text_list = []
+    bb_confidences= []
     for ind in index:
         x,y,w,h =  boxes_np[ind]
         bb_conf = confidences_np[ind]
-        conf_text = 'plate: {:.0f}%'.format(bb_conf*100)
-        license_text = extract_text(image,boxes_np[ind])
+        license_text = extract_text(img, boxes_np[ind])
 
-        cv2.rectangle(image, (x,y), (x+w, y+h), (255,0,255), 10)
-        cv2.rectangle(image, (x,y-30), (x+w, y), (0,0,0),-1)
-        
-        cv2.rectangle(image, (x,y+h), (x+w, y+h+30), (0,0,0),-1)
-
-        cv2.putText(image, conf_text, (x,y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255,255,255),3)
-        
-        cv2.putText(image, license_text, (x, y+h+25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255),2) # text
-
+        bb_confidences.append(bb_conf)
         text_list.append(license_text)
 
-    return image,  text_list
+    return text_list, bb_confidences
+
+
 
 def yolo_preds_for_real_time(img):
     input_image, detections = get_detections(img,net)
