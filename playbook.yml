@@ -1,7 +1,7 @@
 ---
 - name: Deploying website with Kubernetes
   hosts: localhost
-  remote_user: nagasrihith608
+  remote_user: saiksk
   tasks:
     - name: create website deployment
       kubernetes.core.k8s:
