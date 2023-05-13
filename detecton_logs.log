@@ -27,3 +27,9 @@
 2023-05-12 17:03:48,513 No Number Plate found in Image-4
 2023-05-12 17:03:48,902 Bounding box of Image-5 has been predicted with an accuracy of 0.890891 and the detected Number plate text is DL3CAY9324
 2023-05-12 17:03:49,293 Bounding box of Image-6 has been predicted with an accuracy of 0.896551 and the detected Number plate text is GIW115A1138
+2023-05-12 17:14:55,265 Bounding box of Image-1 has been predicted with an accuracy of 0.911000 and the detected Number plate text is MH20BY3665
+2023-05-12 17:14:55,627 Bounding box of Image-2 has been predicted with an accuracy of 0.909379 and the detected Number plate text is MH14EU3498
+2023-05-12 17:14:56,008 Bounding box of Image-3 has been predicted with an accuracy of 0.905078 and the detected Number plate text is RBUED
+2023-05-12 17:14:56,229 No Number Plate found in Image-4
+2023-05-12 17:14:56,599 Bounding box of Image-5 has been predicted with an accuracy of 0.890891 and the detected Number plate text is DL3CAY9324
+2023-05-12 17:14:56,959 Bounding box of Image-6 has been predicted with an accuracy of 0.896551 and the detected Number plate text is GIW115A1138
