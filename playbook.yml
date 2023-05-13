@@ -1,13 +1,14 @@
 ---
-- name: Deploying website with Kubernetes
-  hosts: localhost
-  remote_user: saiksk
+- name: Pull docker image
+  hosts: all
   tasks:
-    - name: create website deployment
-      kubernetes.core.k8s:
-        definition: "{{ lookup('file', './k8s-deploy.yaml') | from_yaml }}"
-        state: present
-    - name: create website service
-      kubernetes.core.k8s:
-        definition: "{{ lookup('file', './k8s-service.yaml') | from_yaml }}" 
-        state: present
+          - name: Pull the image from dockerhub
+            docker_image:
+                  name: sk12092001/number_plate_detection 
+                  source: pull
+
+          - name: Write command after pulling image
+            shell: 'echo "Finished pulling image"'
+
+          - name: running container
+            shell: docker run -id sk12092001/number_plate_detection
