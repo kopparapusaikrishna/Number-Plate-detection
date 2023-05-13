@@ -1,0 +1,14 @@
+---
+- name: Pull docker image
+  hosts: all
+  tasks:
+          - name: Pull the image from dockerhub
+            docker_image:
+                  name: sk12092001/number_plate_detection 
+                  source: pull
+
+          - name: Write command after pulling image
+            shell: 'echo "Finished pulling image"'
+
+          - name: running container
+            shell: docker run -id sk12092001/number_plate_detection

@@ -1,0 +1,2 @@
+#172.16.141.165 ansible_user=nagasrihith608 ansible_password=Nag5858*
+localhost ansible_user=saiksk ansible_connection=local ansible_python_interpreter=/usr/bin/python3
