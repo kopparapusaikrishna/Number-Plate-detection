@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import pytesseract as pt
 
-pt.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# pt.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 INPUT_WIDTH =  640
