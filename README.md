@@ -10,5 +10,5 @@ We design an application where one can upload the image containing a car’s num
 
 The architecture of our project demands two layers.
 Front end
-Back end.
+Back end
 The front end of the project is handled by “html”, javascript and the backend is swiftly handled by “Python”, using “Flask” for interaction between ends.
