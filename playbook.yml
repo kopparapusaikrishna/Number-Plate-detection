@@ -4,11 +4,11 @@
   tasks:
           - name: Pull the image from dockerhub
             docker_image:
-                  name: sk12092001/number_plate_detection 
+                  name: nagasrihith608/numberplatedetection 
                   source: pull
 
           - name: Write command after pulling image
             shell: 'echo "Finished pulling image"'
 
           - name: running container
-            shell: docker run -id sk12092001/number_plate_detection
+            shell: docker run -it -d nagasrihith608/numberplatedetection /bin/bash
