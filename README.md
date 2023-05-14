@@ -1,4 +1,4 @@
-# Number-Plate-detection
+# Car Number-Plate-detection
 
 Number plate detection allows computers to read and interpret vehicle number plates from digital images. It involves the use of image processing techniques to detect, segment, and recognize characters on license plates, which can be used for various applications such as traffic monitoring, law enforcement, and toll collection.
 
