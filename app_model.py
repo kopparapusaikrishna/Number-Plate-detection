@@ -2,13 +2,14 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import pytesseract as pt
+# import onnxruntime as ort
 
 pt.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 INPUT_WIDTH =  640
 INPUT_HEIGHT = 640
-net = cv2.dnn.readNetFromONNX('./static/models/best.onnx')
+net = cv2.dnn.readNet('./static/models/best.onnx')
 net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
@@ -19,7 +20,7 @@ def get_detections(img, net):
     row, col, d = image.shape
 
     max_rc = max(row, col)
-    input_image = np.zeros((max_rc, max_rc, 3), dtype=np.uint8)
+    input_image = np.zeros((max_rc, max_rc, 3), dtype='float32')
     input_image[0:row, 0:col] = image
     
     blob = cv2.dnn.blobFromImage(input_image, 1/255, (INPUT_WIDTH, INPUT_HEIGHT), swapRB=True, crop=False)
