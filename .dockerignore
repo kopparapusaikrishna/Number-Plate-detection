@@ -2,9 +2,9 @@
 data_images
 dataset
 Model-YOLOv5-Collab
-static
-templates
-Verification
+# static
+# templates
+# Verification
 
 Number_Plate_detection_using_YOLOv5.ipynb
 YOLO Predictions.ipynb
