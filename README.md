@@ -9,6 +9,6 @@ In this project we first used CNN for identifying number plates, but it wasn’t
 We design an application where one can upload the image containing a car’s number plate to see the output our trained model gives.
 
 The architecture of our project demands two layers.
-Front end.
+Front end
 Back end.
 The front end of the project is handled by “html”, javascript and the backend is swiftly handled by “Python”, using “Flask” for interaction between ends.
