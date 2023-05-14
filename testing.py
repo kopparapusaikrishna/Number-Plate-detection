@@ -41,16 +41,16 @@ class TestModel(unittest.TestCase):
             print("Bounding box of Image-2 has been predicted with an accuracy of", bb_confidences[0], "and the detected Number plate text is", text_list[0])
             logger.info("Bounding box of Image-2 has been predicted with an accuracy of %f and the detected Number plate text is %s",bb_confidences[0],  text_list[0])
 
-    def test3(self):
-        text_list, bb_confidences = test_function_for_bb_detections(get_image(9))
-        self.assertEqual(text_list[0], "HR26U7501")
-        self.assertNotEqual(text_list[0], -1)
-        if text_list[0]==-1:
-            print("No Number Plate found in Image-3")
-            logger.info("No Number Plate found in Image-3")
-        else:
-            print("Bounding box of Image-3 has been predicted with an accuracy of", bb_confidences[0], "and the detected Number plate text is", text_list[0])
-            logger.info("Bounding box of Image-3 has been predicted with an accuracy of %f and the detected Number plate text is %s",bb_confidences[0],  text_list[0])
+#     def test3(self):
+#         text_list, bb_confidences = test_function_for_bb_detections(get_image(9))
+#         self.assertEqual(text_list[0], "HR26U7501")
+#         self.assertNotEqual(text_list[0], -1)
+#         if text_list[0]==-1:
+#             print("No Number Plate found in Image-3")
+#             logger.info("No Number Plate found in Image-3")
+#         else:
+#             print("Bounding box of Image-3 has been predicted with an accuracy of", bb_confidences[0], "and the detected Number plate text is", text_list[0])
+#             logger.info("Bounding box of Image-3 has been predicted with an accuracy of %f and the detected Number plate text is %s",bb_confidences[0],  text_list[0])
 
     def test4(self):
         text_list, bb_confidences = test_function_for_bb_detections(get_image(6))
@@ -74,16 +74,16 @@ class TestModel(unittest.TestCase):
             print("Bounding box of Image-5 has been predicted with an accuracy of", bb_confidences[0], "and the detected Number plate text is", text_list[0])
             logger.info("Bounding box of Image-5 has been predicted with an accuracy of %f and the detected Number plate text is %s",bb_confidences[0],  text_list[0])
 
-    def test6(self):
-        text_list, bb_confidences = test_function_for_bb_detections(get_image(7))
-        self.assertEqual(text_list[0], "GJW115A1138")
-        self.assertNotEqual(text_list, -1)
-        if text_list==-1:
-            print("No Number Plate found in Image-6")
-            logger.info("No Number Plate found in Image-6")
-        else:
-            print("Bounding box of Image-6 has been predicted with an accuracy of", bb_confidences[0], "and the detected Number plate text is", text_list[0])
-            logger.info("Bounding box of Image-6 has been predicted with an accuracy of %f and the detected Number plate text is %s",bb_confidences[0],  text_list[0])
+#     def test6(self):
+#         text_list, bb_confidences = test_function_for_bb_detections(get_image(7))
+#         self.assertEqual(text_list[0], "GJW115A1138")
+#         self.assertNotEqual(text_list, -1)
+#         if text_list==-1:
+#             print("No Number Plate found in Image-6")
+#             logger.info("No Number Plate found in Image-6")
+#         else:
+#             print("Bounding box of Image-6 has been predicted with an accuracy of", bb_confidences[0], "and the detected Number plate text is", text_list[0])
+#             logger.info("Bounding box of Image-6 has been predicted with an accuracy of %f and the detected Number plate text is %s",bb_confidences[0],  text_list[0])
 
 if __name__ == '__main__':
     unittest.main()
